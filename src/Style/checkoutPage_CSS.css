@@ -1,0 +1,50 @@
+.register-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0; 
+    background-image: url("https://images.pexels.com/photos/5650049/pexels-photo-5650049.jpeg?cs=srgb&dl=pexels-karolina-grabowska-5650049.jpg&fm=jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.card {
+    color: rgba(22, 20, 23, 0.816); 
+    background-color: rgba(126, 126, 128, 0.139); 
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.362); 
+}
+
+.label{
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.inputField {
+    background-color: rgba(237, 237, 237, 0.63);
+    padding: 7px;
+    border-radius: 8px;
+    display: block;
+    width: 100%; 
+    margin-top: 5px;
+    color:rgb(0, 0, 0); 
+}
+
+.login{
+    text-decoration: none;
+    color: rgb(221, 236, 158);
+}
+
+.btn:hover {
+    background-color: #0662a4c6;
+}
+
+.error{
+    color: red;
+    font-size: 15px;
+}

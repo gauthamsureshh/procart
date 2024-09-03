@@ -7,7 +7,7 @@ function App() {
     <>
     <Aboutus/>
     <HomePage/>
-    {/* <Footer/> */}
+    <Footer/>
     </>
   );
 }
