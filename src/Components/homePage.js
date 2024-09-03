@@ -10,7 +10,7 @@ function HomePage(){
     const nav=useNavigate()
 
     useEffect(()=>{
-        axios.get('http://127.0.0.1:8000/movielist').then(response=>{
+        axios.get('http://127.0.0.1:8000/productlist').then(response=>{
                 setProducts(response.data)
         })
     },[])
@@ -28,10 +28,10 @@ function HomePage(){
             <div className='product-list-container'>
                 {products.slice(0, showAll ? products.length : 4).map(product => (
                 <div className='product-card' key={product.id}>
-                    <img className="product-image" src={product.poster_url} alt='Product' />
+                    <img className="product-image" src={product.image_url} alt='Product' />
                     <div className="product-details">
-                        <h2 className="name">{product.movie_title}</h2>
-                        <h2 className="price">${product.genre}</h2>
+                        <h2 className="name">{product.name}</h2>
+                        <h2 className="price">${product.price}</h2>
                     </div>
                 <button className="btn-more-details" onClick={() => handleMoreDetails(product.id)}>More Details</button>
                 </div>
