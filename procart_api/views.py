@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404
 from rest_framework.permissions import AllowAny
 from rest_framework.decorators import permission_classes,api_view
 from rest_framework.response import Response
@@ -24,17 +24,24 @@ def productDetails(request,productid):
     serializer = ProductSerializer(product, many =True)
     return Response(serializer.data)
 
-#api to add items to cart
+#api to add items to cart and if item already in cart, increament the qty by one
 @api_view(['POST'])
 @permission_classes((AllowAny,))
 def addToCart(request):
-    if request.method == 'POST':
-        serializer = CartItemSerializer(data = request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response('Item Added to Cart',status=status.HTTP_201_CREATED)
-        return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-
+    product_id = request.data.get('product')
+    quantity = request.data.get('quantity')
+    product = get_object_or_404(Products, id = product_id)
+    
+    cart_item, created = CartItem.objects.get_or_create(product = product)
+    if not created:
+        cart_item.quantity += int(quantity)
+        cart_item.save()
+    else:
+        cart_item.quantity = quantity
+        cart_item.save()
+    
+    serializer = CartItemSerializer(cart_item)
+    return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 #api to view all the items in cart
 @api_view(['GET'])
@@ -43,3 +50,26 @@ def cartItems(request):
     cart_item = CartItem.objects.all()
     serializer = CartItemSerializer(cart_item, many= True)
     return Response(serializer.data)
+
+#api to remove an item from the cart
+@api_view(['DELETE'])
+def removeCartItem(request, productid):
+    try:
+        cart_item = get_object_or_404(CartItem, id=productid)
+        cart_item.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except Exception as e:
+        return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+#api to update the quantity of items added to cart
+@api_view(['PUT'])
+@permission_classes((AllowAny,))
+def updateCartItem(request, productid):
+    cart_item = get_object_or_404(CartItem, id = productid)
+    quantity = request.data.get('quantity')
+    cart_item.quantity = quantity
+    cart_item.save()
+    
+    serializer = CartItemSerializer(cart_item)
+    return Response(serializer.data)
+
