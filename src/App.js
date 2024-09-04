@@ -1,11 +1,12 @@
 import Footer from "./Components/footer";
 import HomePage from "./Components/homePage";
-import Aboutus from "./Components/navBar";
+import NavBar from "./Components/navBar";
+
 
 function App() {
   return (
     <>
-    <Aboutus/>
+    <NavBar/>
     <HomePage/>
     <Footer/>
     </>

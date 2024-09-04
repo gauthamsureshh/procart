@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 
-function Aboutus() {
+function NavBar() {
     return (
         <nav className="navbar navbar-dark bg-dark justify-content-between">
             <a href='/' className="navbar-brand" style={{ color: 'white', fontSize: '20px', fontWeight: 'bold' }}>Procart</a>
@@ -18,4 +18,4 @@ function Aboutus() {
     );
 }
 
-export default Aboutus;
+export default NavBar;

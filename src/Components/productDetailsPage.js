@@ -1,9 +1,10 @@
 import React, { useState, useEffect} from 'react';
 import { useParams,useNavigate } from "react-router-dom";
 import axios from 'axios';
-import { prodId,prodName,prodPrice,prodQty } from '../store/productSlice';
+import { addCartItem} from '../store/productSlice';
 import { useDispatch } from 'react-redux';
 import "../Style/productDetails_CSS.css";
+import NavBar from './navBar';
 
 function ProductDetailsPage(){
     const {productid} = useParams();
@@ -24,16 +25,14 @@ function ProductDetailsPage(){
     }
 
     const addToCart=()=>{
-        dispatch(prodId(productid));
-        dispatch(prodName(product.name));
-        dispatch(prodPrice(productid.price));
-        dispatch(prodQty(2));
+        dispatch(addCartItem({ productid,product } ));
         navigate("../shoppingcart");
 
     }
 
-
     return(
+        <>
+        <NavBar/>
         <div className="product-detail">
             <div className="card">
                 <h1>PRODUCT DETAILS</h1>
@@ -44,6 +43,7 @@ function ProductDetailsPage(){
                 <button onClick={addToCart}>Add to Cart</button>
             </div>
         </div>
+        </>
     );
 }
 
