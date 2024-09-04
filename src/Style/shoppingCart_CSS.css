@@ -1,8 +1,10 @@
-/* ShoppingCart.css */
-.cart-container {
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
+
+.cart-container p {
+    text-align: center;
+    font-size: 55px;
+    font-weight: bold;
+    color: #333;
+    margin-top: 40px;
 }
 
 .cart-item {

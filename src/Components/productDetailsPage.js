@@ -11,6 +11,7 @@ function ProductDetailsPage(){
     const [product, setProduct] = useState(null);
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const quantity = 1;
 
     useEffect(() => {
         axios.get(`http://127.0.0.1:8000/productdetails/${productid}/`).then(response => {
@@ -25,11 +26,11 @@ function ProductDetailsPage(){
     }
 
     const addToCart=()=>{
-        dispatch(addCartItem({ productid,product } ));
+        dispatch(addCartItem( productid,product,quantity ));
         navigate("../shoppingcart");
 
-    }
-
+    };
+    
     return(
         <>
         <NavBar/>
